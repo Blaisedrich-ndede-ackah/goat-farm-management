@@ -1,0 +1,191 @@
+{
+  "name": "Goat Farm Management System",
+  "short_name": "GoatFarm",
+  "description": "Comprehensive offline-capable web application for managing goat farm operations including attendance tracking, medical records, and breeding logs.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#2c5530",
+  "background_color": "#f5f5f5",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "business", "agriculture"],
+  "icons": [
+    {
+      "src": "icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Record Attendance",
+      "short_name": "Attendance",
+      "description": "Quickly record goat attendance with barcode scanning",
+      "url": "/?tab=attendance",
+      "icons": [
+        {
+          "src": "icons/shortcut-attendance.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Medical Records",
+      "short_name": "Medical",
+      "description": "Access and manage goat medical records",
+      "url": "/?tab=medical",
+      "icons": [
+        {
+          "src": "icons/shortcut-medical.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View farm statistics and notifications",
+      "url": "/?tab=overview",
+      "icons": [
+        {
+          "src": "icons/shortcut-dashboard.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Breeding Records",
+      "short_name": "Breeding",
+      "description": "Manage goat breeding and birth records",
+      "url": "/?tab=breeding",
+      "icons": [
+        {
+          "src": "icons/shortcut-breeding.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/dashboard-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Dashboard view on mobile showing farm statistics and recent activity"
+    },
+    {
+      "src": "screenshots/attendance-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Attendance tracking with barcode scanner interface"
+    },
+    {
+      "src": "screenshots/dashboard-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Full dashboard view on desktop with all statistics and navigation"
+    },
+    {
+      "src": "screenshots/medical-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Medical records management interface"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://goat-farm-manager.example.com/manifest.json"
+    }
+  ],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "file_handlers": [
+    {
+      "action": "/import",
+      "accept": {
+        "text/csv": [".csv"],
+        "application/vnd.ms-excel": [".xls"],
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+goatfarm",
+      "url": "/?action=%s"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "handle_links": "preferred",
+  "scope_extensions": [
+    {
+      "origin": "https://api.goat-farm.example.com"
+    }
+  ],
+  "id": "goat-farm-management-system",
+  "version": "1.0.0",
+  "author": "Farm Management Solutions",
+  "publisher": "Farm Tech Solutions",
+  "offline_support": true,
+  "installable": true,
+  "permissions": ["camera", "geolocation", "notifications", "persistent-storage"],
+  "features": ["offline-functionality", "barcode-scanning", "push-notifications", "background-sync", "data-export"]
+}

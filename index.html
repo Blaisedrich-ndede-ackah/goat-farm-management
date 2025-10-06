@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goat Farm Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c5530">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Page -->
+        <div id="login-page" class="page active">
+            <div class="login-container">
+                <div class="login-header">
+                    <h1>🐐 Goat Farm Manager</h1>
+                    <p>Secure farm management system</p>
+                </div>
+                
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    
+                    <div class="demo-credentials">
+                        <p><strong>Demo Credentials:</strong></p>
+                        <p>Admin: admin / password</p>
+                        <p>Farmhand: john_doe / password</p>
+                    </div>
+                </form>
+                
+                <div id="login-error" class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page">
+            <header class="app-header">
+                <div class="header-content">
+                    <h1>🐐 Farm Dashboard</h1>
+                    <div class="header-actions">
+                        <button id="sync-btn" class="btn btn-secondary">
+                            <span class="sync-icon">🔄</span> Sync
+                        </button>
+                        <button id="logout-btn" class="btn btn-outline">Logout</button>
+                    </div>
+                </div>
+                <nav class="nav-tabs">
+                    <button class="nav-tab active" data-tab="overview">Overview</button>
+                    <button class="nav-tab" data-tab="attendance">Attendance</button>
+                    <button class="nav-tab" data-tab="medical">Medical</button>
+                    <button class="nav-tab" data-tab="breeding">Breeding</button>
+                    <button class="nav-tab admin-only" data-tab="goats">Animals</button>
+                    <button class="nav-tab admin-only" data-tab="export">Export</button>
+                </nav>
+            </header>
+
+            <main class="main-content">
+                <!-- Overview Tab -->
+                <div id="overview-tab" class="tab-content active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🐐</div>
+                            <div class="stat-info">
+                                <h3 id="total-goats">0</h3>
+                                <p>Total Animals</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-info">
+                                <h3 id="todays-attendance">0</h3>
+                                <p>Today's Attendance</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">🏥</div>
+                            <div class="stat-info">
+                                <h3 id="pending-medical">0</h3>
+                                <p>Pending Medical</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">🍼</div>
+                            <div class="stat-info">
+                                <h3 id="upcoming-births">0</h3>
+                                <p>Upcoming Births</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-sections">
+                        <section class="notifications-section">
+                            <h2>📢 Notifications</h2>
+                            <div id="notifications-list" class="notifications-list">
+                                <!-- Notifications will be loaded here -->
+                            </div>
+                        </section>
+
+                        <section class="recent-activity">
+                            <h2>📊 Recent Attendance</h2>
+                            <div id="recent-attendance" class="activity-list">
+                                <!-- Recent attendance will be loaded here -->
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Attendance Tab -->
+                <div id="attendance-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h2>📋 Attendance Tracking</h2>
+                        <div class="tab-actions">
+                            <input type="date" id="attendance-date" class="date-input">
+                            <button id="scan-barcode-btn" class="btn btn-primary">📱 Scan Barcode</button>
+                        </div>
+                    </div>
+
+                    <div class="barcode-scanner" id="barcode-scanner">
+                        <div class="scanner-container">
+                            <h3>Scan Goat Barcode</h3>
+                            <input type="text" id="barcode-input" placeholder="Scan or enter barcode/ear tag" autofocus>
+                            <div class="scanner-actions">
+                                <button id="confirm-scan" class="btn btn-success">Confirm</button>
+                                <button id="cancel-scan" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="attendance-list" class="data-table">
+                        <!-- Attendance records will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Medical Tab -->
+                <div id="medical-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h2>🏥 Medical Records</h2>
+                        <button id="add-medical-btn" class="btn btn-primary">+ Add Medical Record</button>
+                    </div>
+
+                    <div id="medical-list" class="data-table">
+                        <!-- Medical records will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Breeding Tab -->
+                <div id="breeding-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h2>🍼 Breeding Records</h2>
+                        <button id="add-breeding-btn" class="btn btn-primary admin-only">+ Add Breeding Record</button>
+                    </div>
+
+                    <div id="breeding-list" class="data-table">
+                        <!-- Breeding records will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Goats Tab (Admin Only) -->
+                <div id="goats-tab" class="tab-content admin-only">
+                    <div class="tab-header">
+                        <h2>Farm Management</h2>
+                        <button id="add-goat-btn" class="btn btn-primary">+ Add Goat</button>
+                    </div>
+
+                    <div id="goats-list" class="data-table">
+                        <!-- Goats list will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Export Tab (Admin Only) -->
+                <div id="export-tab" class="tab-content admin-only">
+                    <div class="tab-header">
+                        <h2>📊 Data Export</h2>
+                    </div>
+
+                    <div class="export-options">
+                        <div class="export-card">
+                            <h3>Attendance Records</h3>
+                            <p>Export all attendance data with timestamps</p>
+                            <button onclick="exportData('attendance')" class="btn btn-primary">Export CSV</button>
+                        </div>
+
+                        <div class="export-card">
+                            <h3>Medical Records</h3>
+                            <p>Export all medical logs and treatments</p>
+                            <button onclick="exportData('medical')" class="btn btn-primary">Export CSV</button>
+                        </div>
+
+                        <div class="export-card">
+                            <h3>Breeding Records</h3>
+                            <p>Export breeding and birth records</p>
+                            <button onclick="exportData('breeding')" class="btn btn-primary">Export CSV</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal for forms -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body">
+                <!-- Dynamic form content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Offline indicator -->
+    <div id="offline-indicator" class="offline-indicator">
+        📡 Offline Mode - Data will sync when connection is restored
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/offline.js"></script>
+    <script src="js/barcode.js"></script>
+</body>
+</html>
